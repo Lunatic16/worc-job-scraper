@@ -89,7 +89,9 @@ jq --version      # Should show 1.5 or higher
 If you haven't already, place the script in your desired directory:
 
 ```bash
-cd /home/god2/Downloads/WORC
+cd ~/worc-job-scraper
+# or
+cd /path/to/your/worc-directory
 ```
 
 ### 2. Make Executable
@@ -313,7 +315,7 @@ open WORC.csv
 [2026-03-25 10:30:38 EST] === WORC Job Scraper Started ===
 [2026-03-25 10:30:38 EST] Fetching job postings from: https://my.egov.ky/o/worc-job-post-search/
 [2026-03-25 10:30:38 EST] User-Agent: Mozilla/5.0 (X11; Linux x86_64) ...
-[2026-03-25 10:30:42 EST] SUCCESS: Saved 47 lines (4.0K) to /home/god2/Downloads/WORC/WORC.csv
+[2026-03-25 10:30:42 EST] SUCCESS: Saved 47 lines (4.0K) to /path/to/worc-job-scraper/WORC.csv
 [2026-03-25 10:30:42 EST] Total duration: 27s (including 23s delay)
 [2026-03-25 10:30:42 EST] === WORC Job Scraper Completed ===
 ```
@@ -337,8 +339,15 @@ open WORC.csv
 
 2. **Add this line to run every hour:**
    ```cron
-   0 * * * * /home/god2/Downloads/WORC/worc-job-scraper.sh
+   0 * * * * /path/to/worc-job-scraper.sh
    ```
+
+**Tip:** Find the absolute path to your script:
+```bash
+cd /path/to/worc-job-scraper
+pwd
+# Use the output in your cron entry
+```
 
 ### Cron Schedule Examples
 
@@ -356,7 +365,7 @@ open WORC.csv
 **1. Use absolute paths:**
 ```cron
 # Good
-0 * * * * /home/god2/Downloads/WORC/worc-job-scraper.sh
+0 * * * * /path/to/worc-job-scraper/worc-job-scraper.sh
 
 # Bad (may not work in cron)
 0 * * * * ./worc-job-scraper.sh
@@ -364,13 +373,13 @@ open WORC.csv
 
 **2. Redirect cron output (optional):**
 ```cron
-0 * * * * /home/god2/Downloads/WORC/worc-job-scraper.sh >> /home/god2/Downloads/WORC/cron.log 2>&1
+0 * * * * /path/to/worc-job-scraper.sh >> /path/to/worc-job-scraper/cron.log 2>&1
 ```
 
 **3. Set PATH in crontab:**
 ```cron
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-0 * * * * /home/god2/Downloads/WORC/worc-job-scraper.sh
+0 * * * * /path/to/worc-job-scraper.sh
 ```
 
 **4. Monitor cron jobs:**
@@ -391,7 +400,7 @@ Before relying on cron, test manually:
 
 ```bash
 # Simulate cron environment
-env -i PATH=/usr/local/bin:/usr/bin:/bin /home/god2/Downloads/WORC/worc-job-scraper.sh
+env -i PATH=/usr/local/bin:/usr/bin:/bin /path/to/worc-job-scraper.sh
 ```
 
 ---
